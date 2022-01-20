@@ -102,7 +102,7 @@ int main()
         string nama = items[i].substr(begin, pos);
         int sizeNama = 36 - nama.length();
 
-        // STRUBG TI ARRAY: HARGA
+        // STRING T0 ARRAY: HARGA
         begin = pos + 1;
         pos = items[i].find(",", begin);
         string harga = items[i].substr(begin, pos - begin);
@@ -157,12 +157,91 @@ int main()
         cout << "Apakah Anda Akan Memesan Lagi? (Y/n): ";
         cin >> yN;
 
+        idNow += 1;
+
         if(yN == "n" || yN == "N") {
             break;
         }
 
-        idNow += 1;
     }
+
+    system("cls");
+
+    // PRINT TABLE 2
+    cout << char(218);
+    for(int i = 0; i < 68; i++) {
+        cout << char(196);
+    }
+    cout << char(191);
+
+    cout << endl;
+
+    // PESANAN ANDA
+    cout << char(179);
+    cout << "                           Pesanan Anda                             " << char(179);
+    cout << endl;
+
+    int totalHarga = 0;
+    // PESANAN ANDA VALUE
+    for(int v = 0; v < idNow; v++) {
+        int getArrayId = menuDipih[v] - 1;
+        int no = v + 1;
+
+        // STRING TO ARRAY: NAMA
+        int begin = 0;
+        int pos = items[getArrayId].find(',');
+        string nama = items[getArrayId].substr(begin, pos);
+        int sizeNama = 36 - nama.length();
+
+        // STRING T0 ARRAY: HARGA
+        begin = pos + 1;
+        pos = items[getArrayId].find(",", begin);
+        string harga = items[getArrayId].substr(begin, pos - begin);
+        int sizeharga = 19 - harga.length();
+
+        cout << char(179);
+
+        int hargaKali = stoi(harga) * jumlahMenu[v];
+
+        cout << " " << no << ".";
+        cout << "  " << nama;
+        cout << "  " << jumlahMenu[v];
+        cout << "  " << hargaKali;
+
+        string allString = "       ." + to_string(no)  + nama + to_string(jumlahMenu[v]) + to_string(hargaKali);
+        int countString = 68 - allString.length();
+
+        for (int s = 0; s < countString; s++)
+        {
+            cout << " ";
+        }
+
+
+        cout << char(179);
+        cout << endl;
+        
+        totalHarga += hargaKali;
+    }
+    
+    cout << char(192);
+    for(int i = 0; i < 68; i++) {
+        cout << char(196);
+    }
+    cout << char(217);
+
+    cout << endl;
+
+    int uangAnda;
+    cout << "Total: " << totalHarga << endl;
+    cout << "Uang Anda: ";
+    cin >> uangAnda;
+
+    system("cls");
+    cout << endl << endl;
+    cout << "Kembalian Anda: " << (uangAnda - totalHarga);
+    cout << endl << endl;
+    cout << "Terima Kasih!!!";
+    cout << endl << endl << endl;
 
     return 0;
 }
